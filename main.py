@@ -13,17 +13,17 @@ from forms import CreatePostForm, RegisterForm, LoginForm, CommentForm
 # Optional: add contact me email functionality (Day 60)
 # import smtplib
 import os
-from dotenv import load_dotenv
 
 
 
 
 
 
-load_dotenv()
+
+
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = os.getenv('FLASK_KEY')
+app.config['SECRET_KEY'] = os.environ.get('FLASK_KEY')
 #app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
 ckeditor = CKEditor(app)
 Bootstrap5(app)
@@ -51,7 +51,7 @@ gravatar = Gravatar(app,
 # CREATE DATABASE
 class Base(DeclarativeBase):
     pass
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DB_URI", "postgresql://musteri_posgresql_unik_user:PG5Lexc56oUVhR7CnhhEraRlOw5gjj4B@dpg-cud8irl2ng1s73bedugg-a/musteri_posgresql_unik")
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DB_URI", "postgresql://musteri_posgresql_unik_user:PG5Lexc56oUVhR7CnhhEraRlOw5gjj4B@dpg-cud8irl2ng1s73bedugg-a/musteri_posgresql_unik")
 #app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///posts.db'
 db = SQLAlchemy(model_class=Base)
 db.init_app(app)
